@@ -8,6 +8,7 @@ Simple to implement jQuery form validation plugin. Add validation to your input 
 
 ####fv-not-empty
 Make sure that a input field isn't empty
+
 Example:
 ```HTML
 fv-not-empty="This field can't be empty"
@@ -15,6 +16,7 @@ fv-not-empty="This field can't be empty"
 
 ####fv-email
 Make sure that a input field has a valid email address
+
 Example:
 ```HTML
 fv-email="This field must be a valid email address"
@@ -26,6 +28,7 @@ You can pass a JSON object to this validation method to perform more advanced va
 The minimum number of characters that this input field has to have
 #####message
 The error message that is displayed when a condition isn't met
+
 Example:
 ```HTML
 fv-advanced='{"min": "6", "message": "This value must be at least 6 characters long."}'
