@@ -26,10 +26,14 @@ fv-email="This field must be a valid email address"
 You can pass a JSON object to this validation method to perform more advanced validation
 #####min
 The minimum number of characters that this input field has to have
+#####max
+The maximum number of characters that this input field can have
+#####regex
+Write a regular expression to match against the field input
 #####message
 The error message that is displayed when a condition isn't met
 
 Example:
 ```HTML
-fv-advanced='{"min": "6", "message": "This value must be at least 6 characters long."}'
+fv-advanced='{"min": "6", "max": "10", "regex": "/\w+/", "message": "This value must be at least 6 characters long."}'
 ```
