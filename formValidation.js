@@ -25,6 +25,7 @@ $(document).ready(function() {
          *
          * Supported attributes:
          *  - min
+         *  - max
          */
         if(typeof $(this).attr('fv-advanced') != "undefined") {
             $(this).off('keyup').on('keyup', function() {
@@ -35,6 +36,16 @@ $(document).ready(function() {
                 if(typeof data.min != "undefined") {
                     if(val.length < data.min) {
                         addError(this, message);
+                        return;
+                    } else {
+                        addSuccess(this);
+                    }
+                }
+
+                if(typeof data.max != "undefined") {
+                    if(val.length > data.max) {
+                        addError(this, message);
+                        return;
                     } else {
                         addSuccess(this);
                     }
