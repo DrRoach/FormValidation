@@ -37,3 +37,21 @@ Example:
 ```HTML
 fv-advanced='{"min": "6", "max": "10", "regex": "/\w+/", "message": "This value must be at least 6 characters long."}'
 ```
+
+##Setup
+You can pass some extra setup data such as custom classes so the whole plugin is easier to work with. You can do this by calling formValidator.setup() or FV.setup() in your code.
+
+Example:
+```HTML
+FV.setup({
+    errorMessageClasses: "col-xs-12 col-sm-8 col-md-4"
+});
+```
+
+#####errorMessageClasses
+Pass in a string of classes to be added to error messages
+
+Example:
+```HTML
+errorMessageClasses: "col-xs-12 col-sm-8 col-md-4"
+```
