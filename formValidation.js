@@ -26,6 +26,7 @@ $(document).ready(function() {
          * Supported attributes:
          *  - min
          *  - max
+         *  - regex
          */
         if(typeof $(this).attr('fv-advanced') != "undefined") {
             $(this).off('keyup').on('keyup', function() {
@@ -50,6 +51,16 @@ $(document).ready(function() {
                         addSuccess(this);
                     }
                 }
+
+                if(typeof data.regex != "undefined") {
+                    var regex = new RegExp(data.regex);
+                    if(val.match(regex)) {
+                        addSuccess(this);
+                    } else {
+                        addError(this, message);
+                        return;
+                    }
+                }
             });
         }
 
@@ -65,6 +76,7 @@ $(document).ready(function() {
                     addSuccess(this);
                 } else {
                     addError(this, message);
+                    return;
                 }
             });
         }
