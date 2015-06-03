@@ -81,6 +81,56 @@ $(document).ready(function() {
             });
         }
 
+        /**
+         * fv-number handling
+         */
+        if (typeof $(this).attr('fv-number') != 'undefined') {
+            $(this).off('keyup').on('keyup', function() {
+                var message = $(this).attr('fv-number');
+                var val = $(this).val();
+
+                if (isNaN(val) || val.length == 0) {
+                    addError(this, message);
+                    return;
+                } else {
+                    addSuccess(this);
+                }
+            });
+        }
+
+        /**
+         * fv-alphanum handling
+         */
+        if (typeof $(this).attr('fv-alphanum') != 'undefined') {
+            $(this).off('keyup').on('keyup', function() {
+                var message = $(this).attr('fv-alphanum');
+                var val = $(this).val();
+
+                if (val.match(/^[a-z0-9]+$/i) != null) {
+                    addSuccess(this);
+                } else {
+                    addError(this, message);
+                    return;
+                }
+            });
+        }
+
+        if (typeof $(this).attr('fv-func') != 'undefined') {
+            $(this).off('keyup').on('keyup', function() {
+                var func = $(this).attr('fv-func');
+                var val = $(this).val();
+
+                func = func.replace('this', '"' + val + '"');
+
+                var resp = eval(func);
+                if (resp === true) {
+                    addSuccess(this);
+                } else {
+                    addError(this, resp);
+                    return;
+                }
+            });
+        }
     });
 
     /**

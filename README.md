@@ -22,6 +22,30 @@ Example:
 fv-email="This field must be a valid email address"
 ```
 
+####fv-number
+Make sure that a input field has a valid number
+
+Example:
+```HTML
+fv-number="This field must be a number"
+```
+
+####fv-alphanum
+Make sure that a input field has a alpha-numeric value
+
+Example:
+```HTML
+fv-alphanum="This field must be a alpha-numeric value"
+```
+
+####fv-func
+Add some JavaScript code to be ran to which will either return true or a error messsage. This is useful when you want to make sure a variable has a certain value for example. You can also use "this" in a fv-func call to reference the current inputs' value
+
+Example:
+```HTML
+fv-func="this == 'I\'m Human!' ? true : 'It looks like you\'re not human'"
+```
+
 ####fv-advanced
 You can pass a JSON object to this validation method to perform more advanced validation
 #####min
