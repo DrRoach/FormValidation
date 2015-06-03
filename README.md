@@ -46,6 +46,13 @@ Example:
 fv-func="this == 'I\'m Human!' ? true : 'It looks like you\'re not human'"
 ```
 
+You can also use JavaScript variables in here
+
+Example:
+```HTML
+fv-func="loading == false ? true : 'The page is loading'"
+```
+
 ####fv-advanced
 You can pass a JSON object to this validation method to perform more advanced validation
 #####min
