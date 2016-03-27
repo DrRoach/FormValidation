@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Formvalidation by DrRoach</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Formvalidation</h1>
+        <h2>jQuery form validation plugin</h2>
+        <a href="https://github.com/DrRoach/FormValidation" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="formvalidation" class="anchor" href="#formvalidation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FormValidation</h1>
+
+<p>Simple to implement jQuery form validation plugin. Add validation to your input fields simply be adding HTML fields to them. An example may look like this:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">fv-email</span>=<span class="pl-s"><span class="pl-pds">"</span>This must be a valid email.<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span> <span class="pl-e">placeholder</span>=<span class="pl-s"><span class="pl-pds">"</span>Email<span class="pl-pds">"</span></span>&gt;</pre></div>
+
+<h2>
+<a id="validation-features" class="anchor" href="#validation-features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Validation Features</h2>
+
+<h4>
+<a id="fv-not-empty" class="anchor" href="#fv-not-empty" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fv-not-empty</h4>
+
+<p>Make sure that a input field isn't empty</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>fv-not-empty="This field can't be empty"</pre></div>
+
+<h4>
+<a id="fv-email" class="anchor" href="#fv-email" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fv-email</h4>
+
+<p>Make sure that a input field has a valid email address</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>fv-email="This field must be a valid email address"</pre></div>
+
+<h4>
+<a id="fv-number" class="anchor" href="#fv-number" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fv-number</h4>
+
+<p>Make sure that a input field has a valid number</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>fv-number="This field must be a number"</pre></div>
+
+<h4>
+<a id="fv-alphanum" class="anchor" href="#fv-alphanum" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fv-alphanum</h4>
+
+<p>Make sure that a input field has a alpha-numeric value</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>fv-alphanum="This field must be a alpha-numeric value"</pre></div>
+
+<h4>
+<a id="fv-func" class="anchor" href="#fv-func" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fv-func</h4>
+
+<p>Add some JavaScript code to be ran to which will either return true or a error messsage. This is useful when you want to make sure a variable has a certain value for example. You can also use "this" in a fv-func call to reference the current inputs' value</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>fv-func="this == 'I\'m Human!' ? true : 'It looks like you\'re not human'"</pre></div>
+
+<p>You can also use JavaScript variables in here</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>fv-func="loading == false ? true : 'The page is loading'"</pre></div>
+
+<h4>
+<a id="fv-advanced" class="anchor" href="#fv-advanced" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fv-advanced</h4>
+
+<p>You can pass a JSON object to this validation method to perform more advanced validation</p>
+
+<h5>
+<a id="min" class="anchor" href="#min" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>min</h5>
+
+<p>The minimum number of characters that this input field has to have</p>
+
+<h5>
+<a id="max" class="anchor" href="#max" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>max</h5>
+
+<p>The maximum number of characters that this input field can have</p>
+
+<h5>
+<a id="regex" class="anchor" href="#regex" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>regex</h5>
+
+<p>Write a regular expression to match against the field input</p>
+
+<h5>
+<a id="message" class="anchor" href="#message" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>message</h5>
+
+<p>The error message that is displayed when a condition isn't met</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>fv-advanced='{"min": "6", "max": "10", "regex": "/\w+/", "message": "This value must be at least 6 characters long."}'</pre></div>
+
+<h2>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setup</h2>
+
+<p>You can pass some extra setup data such as custom classes so the whole plugin is easier to work with. You can do this by calling formValidator.setup() or FV.setup() in your code.</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>FV.setup({
+    errorMessageClasses: "col-xs-12 col-sm-8 col-md-4"
+});</pre></div>
+
+<h5>
+<a id="errormessageclasses" class="anchor" href="#errormessageclasses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>errorMessageClasses</h5>
+
+<p>Pass in a string of classes to be added to error messages</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>errorMessageClasses: "col-xs-12 col-sm-8 col-md-4"</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/DrRoach/FormValidation/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/DrRoach/FormValidation/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/DrRoach/FormValidation"></a> is maintained by <a href="https://github.com/DrRoach">DrRoach</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
