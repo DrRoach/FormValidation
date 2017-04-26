@@ -79,7 +79,7 @@ FV.setup({
 });
 ```
 
-#####errorMessageClasses
+##### errorMessageClasses
 Pass in a string of classes to be added to error messages
 
 Example:
