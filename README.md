@@ -4,9 +4,9 @@ Simple to implement jQuery form validation plugin. Add validation to your input 
 <input type="text" fv-email="This must be a valid email." name="email" placeholder="Email">
 ```
 
-##Validation Features
+## Validation Features
 
-####fv-not-empty
+#### fv-not-empty
 Make sure that a input field isn't empty
 
 Example:
@@ -14,7 +14,7 @@ Example:
 fv-not-empty="This field can't be empty"
 ```
 
-####fv-email
+#### fv-email
 Make sure that a input field has a valid email address
 
 Example:
@@ -22,7 +22,7 @@ Example:
 fv-email="This field must be a valid email address"
 ```
 
-####fv-number
+#### fv-number
 Make sure that a input field has a valid number
 
 Example:
@@ -30,7 +30,7 @@ Example:
 fv-number="This field must be a number"
 ```
 
-####fv-alphanum
+#### fv-alphanum
 Make sure that a input field has a alpha-numeric value
 
 Example:
@@ -38,7 +38,7 @@ Example:
 fv-alphanum="This field must be a alpha-numeric value"
 ```
 
-####fv-func
+#### fv-func
 Add some JavaScript code to be ran to which will either return true or a error messsage. This is useful when you want to make sure a variable has a certain value for example. You can also use "this" in a fv-func call to reference the current inputs' value
 
 Example:
@@ -53,15 +53,15 @@ Example:
 fv-func="loading == false ? true : 'The page is loading'"
 ```
 
-####fv-advanced
+#### fv-advanced
 You can pass a JSON object to this validation method to perform more advanced validation
-#####min
+##### min
 The minimum number of characters that this input field has to have
-#####max
+##### max
 The maximum number of characters that this input field can have
-#####regex
+##### regex
 Write a regular expression to match against the field input
-#####message
+##### message
 The error message that is displayed when a condition isn't met
 
 Example:
@@ -69,7 +69,7 @@ Example:
 fv-advanced='{"min": "6", "max": "10", "regex": "/\w+/", "message": "This value must be at least 6 characters long."}'
 ```
 
-##Setup
+## Setup
 You can pass some extra setup data such as custom classes so the whole plugin is easier to work with. You can do this by calling formValidator.setup() or FV.setup() in your code.
 
 Example:
