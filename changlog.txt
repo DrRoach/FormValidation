@@ -1,5 +1,0 @@
-v0.1.0
-
-- Added fv-number
-- Added fv-alphanum
-- Added fv-func
