@@ -61,6 +61,8 @@ The minimum number of characters that this input field has to have
 The maximum number of characters that this input field can have
 ##### regex
 Write a regular expression to match against the field input
+##### regex_reverse
+Boolean that can tell our checks to fail on the inverse of our regular expression. For example, say you don't want any whitespace in your input. Setting this value to `true` will throw your error if it finds any whitespace. Rather than trying to force whitespace only.
 ##### message
 The error message that is displayed when a condition isn't met
 

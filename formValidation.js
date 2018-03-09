@@ -54,11 +54,25 @@ $(document).ready(function() {
 
                 if(typeof data.regex != "undefined") {
                     var regex = new RegExp(data.regex);
+
+                    var reverse = false;
+                    if (typeof data.regex_reverse != "undefined") {
+                        reverse = data.regex_reverse;
+                    }
+
                     if(val.match(regex)) {
-                        addSuccess(this);
+                        if (!reverse) {
+                            addSuccess(this);
+                        } else {
+                            addError(this, message);
+                        }
                     } else {
-                        addError(this, message);
-                        return;
+                        if (!reverse) {
+                            addError(this, message);
+                            return;
+                        } else {
+                            addSuccess(this);
+                        }
                     }
                 }
             });
