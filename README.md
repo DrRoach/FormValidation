@@ -68,7 +68,7 @@ The error message that is displayed when a condition isn't met
 
 Example:
 ```HTML
-fv-advanced='{"min": "6", "max": "10", "regex": "/\w+/", "message": "This value must be at least 6 characters long."}'
+fv-advanced='{"min": "6", "max": "10", "regex": "\\w+", "message": "This value must be at least 6 characters long."}'
 ```
 
 ## Setup
