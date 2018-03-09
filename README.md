@@ -22,6 +22,14 @@ Example:
 fv-email="This field must be a valid email address"
 ```
 
+#### fv-simple-email
+Much simpler email check that only looks for `@` in input. This may be a better choice for large-scale production use where the 0.1% of emails that may fail the `fv-email` check will not fail.
+
+Example:
+```HTML
+fv-simple-email="This field must be a valid email address"
+```
+
 #### fv-number
 Make sure that a input field has a valid number
 

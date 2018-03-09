@@ -80,13 +80,29 @@ $(document).ready(function() {
 
         /**
          * fv-email handling
+         *
+         * fv-simple-email is a simple check to see if `@` exists in the input.
+         * fv-email is a more complicated regex taken from here: http://emailregex.com/#disqus_thread
          */
+        if (typeof $(this).attr('fv-simple-email') != "undefined") {
+            $(this).off('keyup').on('keyup', function() {
+                var message = $(this).attr('fv-simple-email');
+                var val = $(this).val();
+
+                if (val.match(/@/) != null) {
+                    addSuccess(this);
+                } else {
+                    addError(this, message);
+                }
+            });
+        }
+
         if(typeof $(this).attr('fv-email') != "undefined") {
             $(this).off('keyup').on('keyup', function() {
                 var message = $(this).attr('fv-email');
                 var val = $(this).val();
 
-                if(val.match(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i) != null) {
+                if(val.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) != null) {
                     addSuccess(this);
                 } else {
                     addError(this, message);
