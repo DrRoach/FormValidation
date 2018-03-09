@@ -4,9 +4,9 @@ Simple to implement jQuery form validation plugin. Add validation to your input 
 <input type="text" fv-email="This must be a valid email." name="email" placeholder="Email">
 ```
 
-## Validation Features
+##Validation Features
 
-#### fv-not-empty
+####fv-not-empty
 Make sure that a input field isn't empty
 
 Example:
