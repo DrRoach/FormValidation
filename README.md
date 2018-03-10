@@ -6,6 +6,8 @@ Simple to implement jQuery form validation plugin. Add validation to your input 
 
 ## Validation Features
 
+[![Feature Requests](https://cloud.githubusercontent.com/assets/390379/10127973/045b3a96-6560-11e5-9b20-31a2032956b2.png)](http://feathub.com/DrRoach/FormValidation)
+
 #### fv-not-empty
 Make sure that a input field isn't empty
 
