@@ -49,7 +49,7 @@ fv-alphanum="This field must be a alpha-numeric value"
 ```
 
 #### fv-func
-Add some JavaScript code to be ran to which will either return true or a error messsage. This is useful when you want to make sure a variable has a certain value for example. You can also use "this" in a fv-func call to reference the current inputs' value
+Add some JavaScript code to be ran to which will either return true or an error message. This is useful when you want to make sure a variable has a certain value for example. You can also use "this" in a fv-func call to reference the current inputs' value
 
 Example:
 ```HTML
