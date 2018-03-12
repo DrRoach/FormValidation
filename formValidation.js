@@ -1,26 +1,123 @@
 var fvId = 1;
 
+function FormValidation() {
+    this.not_empty = function(input) {
+        if (input == null || input.length == 0) {
+            // Input is empty so fail
+            return false;
+        } else {
+            // Input isn't empty so return pass
+            return true;
+        }
+    };
+
+    this.simple_email = function(input) {
+        if (input != null && input.match(/@/) != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    };
+
+    this.email = function(input) {
+        if(input != null && input.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    this.number = function(input) {
+        if (isNaN(input) || input.length == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    this.alphanum = function(input) {
+        if (input != null && input.match(/^[a-z0-9]+$/i) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    this.func = function(input, func) {
+        func = func.replace('this', '"' + input + '"');
+
+        var resp = eval(func);
+
+        if (resp === true) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    this.advanced = function(input, data) {
+        if(typeof data.min != "undefined") {
+            if(input.length < data.min) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        if(typeof data.max != "undefined") {
+            if(input.length > data.max) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        if(typeof data.regex != "undefined") {
+            var regex = new RegExp(data.regex);
+
+            var reverse = false;
+            if (typeof data.regex_reverse != "undefined") {
+                reverse = data.regex_reverse;
+            }
+
+            if(input.match(regex)) {
+                if (!reverse) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if (!reverse) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+    };
+};
+
+
 $(document).ready(function() {
+    // Create our validation object
+    var fv = new FormValidation();
+
     $.each($('input'), function() {
         this.validations = 0;
 
-        /**
-         * fv-not-empty handling
-         *
-         * The text inside of the quotes is the error message to be added to the input
-         * leave this blank to add none
-         */
         if(typeof $(this).attr('fv-not-empty') != "undefined") {
             this.validations++;
 
             var message = $(this).attr('fv-not-empty');
 
             $(this).on('keyup', function() {
-                if($(this).val().length == 0) {
-                    addError(this, message);
-                    return;
-                } else {
+                var input = $(this).val();
+
+                if (fv.not_empty(input) == true) {
                     addSuccess(this);
+                } else {
+                    addError(this, message);
                 }
             });
         }
@@ -35,52 +132,16 @@ $(document).ready(function() {
          */
         if(typeof $(this).attr('fv-advanced') != "undefined") {
             this.validations++;
+            var data = JSON.parse($(this).attr('fv-advanced'));
+            var message = data.message || "";
 
             $(this).on('keyup', function() {
-                var data = JSON.parse($(this).attr('fv-advanced'));
-                var val = $(this).val();
-                var message = data.message || "";
+                var input = $(this).val();
 
-                if(typeof data.min != "undefined") {
-                    if(val.length < data.min) {
-                        addError(this, message);
-                        return;
-                    } else {
-                        addSuccess(this);
-                    }
-                }
-
-                if(typeof data.max != "undefined") {
-                    if(val.length > data.max) {
-                        addError(this, message);
-                        return;
-                    } else {
-                        addSuccess(this);
-                    }
-                }
-
-                if(typeof data.regex != "undefined") {
-                    var regex = new RegExp(data.regex);
-
-                    var reverse = false;
-                    if (typeof data.regex_reverse != "undefined") {
-                        reverse = data.regex_reverse;
-                    }
-
-                    if(val.match(regex)) {
-                        if (!reverse) {
-                            addSuccess(this);
-                        } else {
-                            addError(this, message);
-                        }
-                    } else {
-                        if (!reverse) {
-                            addError(this, message);
-                            return;
-                        } else {
-                            addSuccess(this);
-                        }
-                    }
+                if (fv.advanced(input, data) == true) {
+                    addSuccess(this);
+                } else {
+                    addError(this, message);
                 }
             });
         }
@@ -93,12 +154,12 @@ $(document).ready(function() {
          */
         if (typeof $(this).attr('fv-simple-email') != "undefined") {
             this.validations++;
+            var message = $(this).attr('fv-simple-email');
 
             $(this).on('keyup', function() {
-                var message = $(this).attr('fv-simple-email');
-                var val = $(this).val();
+                var input = $(this).val();
 
-                if (val.match(/@/) != null) {
+                if (fv.simple_email(input) == true) {
                     addSuccess(this);
                 } else {
                     addError(this, message);
@@ -108,16 +169,15 @@ $(document).ready(function() {
 
         if(typeof $(this).attr('fv-email') != "undefined") {
             this.validations++;
+            var message = $(this).attr('fv-email');
 
             $(this).on('keyup', function() {
-                var message = $(this).attr('fv-email');
-                var val = $(this).val();
+                var input = $(this).val();
 
-                if(val.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) != null) {
-                    addSuccess(this);
+                if (fv.email(input) == true) {
+                    addSuccess(true);
                 } else {
                     addError(this, message);
-                    return;
                 }
             });
         }
@@ -127,16 +187,15 @@ $(document).ready(function() {
          */
         if (typeof $(this).attr('fv-number') != 'undefined') {
             this.validations++;
+            var message = $(this).attr('fv-number');
 
             $(this).on('keyup', function() {
-                var message = $(this).attr('fv-number');
-                var val = $(this).val();
+                var input = $(this).val();
 
-                if (isNaN(val) || val.length == 0) {
-                    addError(this, message);
-                    return;
-                } else {
+                if (fv.number(input) == true) {
                     addSuccess(this);
+                } else {
+                    addError(this, message);
                 }
             });
         }
@@ -146,35 +205,30 @@ $(document).ready(function() {
          */
         if (typeof $(this).attr('fv-alphanum') != 'undefined') {
             this.validations++;
+            var message = $(this).attr('fv-alphanum');
 
             $(this).on('keyup', function() {
-                var message = $(this).attr('fv-alphanum');
-                var val = $(this).val();
+                var input = $(this).val();
 
-                if (val.match(/^[a-z0-9]+$/i) != null) {
+                if (fv.alphanum(input) == true) {
                     addSuccess(this);
                 } else {
                     addError(this, message);
-                    return;
                 }
             });
         }
 
         if (typeof $(this).attr('fv-func') != 'undefined') {
             this.validations++;
+            var func = $(this).attr('fv-func');
 
             $(this).on('keyup', function() {
-                var func = $(this).attr('fv-func');
-                var val = $(this).val();
+                var input = $(this).val();
 
-                func = func.replace('this', '"' + val + '"');
-
-                var resp = eval(func);
-                if (resp === true) {
+                if (fv.func(input, func) == true) {
                     addSuccess(this);
                 } else {
-                    addError(this, resp);
-                    return;
+                    addError(this, message);
                 }
             });
         }
@@ -197,7 +251,7 @@ $(document).ready(function() {
         }
 
         if($(self).siblings(selector).length === 0) {
-            $(self).removeClass('fv-success').addClass('fv-error').attr('data-fvid', fvId).after('<small class="fv-error-message ' + formValidation.errorMessageClasses + '" data-fvId="'+ fvId++ +'">' + message + '</small>');
+            $(self).removeClass('fv-success').addClass('fv-error').attr('data-fvid', fvId).after('<small class="fv-error-message ' + FV.errorMessageClasses + '" data-fvId="'+ fvId++ +'">' + message + '</small>');
             $(self).closest('form').find('input[type="submit"]').prop('disabled', true);
         } else {
             // Error message already exists so replace text
@@ -210,7 +264,7 @@ $(document).ready(function() {
      * @param self
      */
     function addSuccess(self) {
-        if (!self.error | self.validations == 1) {
+        if (!self.error || self.validations == 1) {
             $(self).removeClass('fv-error').addClass('fv-success');
             if($(self).siblings('.fv-error-message').length > 0) {
                 var id = $(self).attr('data-fvid');
@@ -225,31 +279,26 @@ $(document).ready(function() {
 });
 
 /**
- * Create base formValidation object
+ * Create shorthand variable for lazy people like me
  */
-var formValidation = {};
+var FV = {};
 
 /**
  * Create variables with their default values
  * @type {string}
  */
-formValidation.errorMessageClasses = "";
+FV.errorMessageClasses = "";
 
 /**
  * Add setup function to allow for some data to be passed
  * @param data
  */
-formValidation.setup = function(data) {
+FV.setup = function(data) {
     /**
      * Check to see if custom classes have been added to error messages, if they have, store them
      * for use later in the script
      */
     if(typeof data.errorMessageClasses != "undefined") {
-        formValidation.errorMessageClasses = data.errorMessageClasses;
+        FV.errorMessageClasses = data.errorMessageClasses;
     }
 };
-
-/**
- * Create shorthand variable for lazy people like me
- */
-var FV = formValidation;
