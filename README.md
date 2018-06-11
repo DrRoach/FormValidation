@@ -81,6 +81,15 @@ Example:
 fv-advanced='{"min": "6", "max": "10", "regex": "\\w+", "message": "This value must be at least 6 characters long."}'
 ```
 
+## Running custom methods
+There are times when you may want to run some JS after a field has been validated or invalidated. To do this you can add the `fv-valid-func` or `fv-invalid-func` data values. These allow you to run a function to add/remove a class on validation and invalidation. These two data types do not currently support the use of `$(this)` so if you wish to target a specific input it will need a unique selector. As of yet this cannot call an already existing JS method although this may be made available in
+the future
+
+Example:
+```HTML
+<input type="text" id="targetedInput" fv-email="Please supply a valid email." fv-valid-func="$('#targetedInput').addClass('custom-valid')" fv-invalid-func="$('#targetedInput').removeClass('custom-valid')">
+```
+
 ## Setup
 You can pass some extra setup data such as custom classes so the whole plugin is easier to work with. You can do this by calling formValidator.setup() or FV.setup() in your code.
 
