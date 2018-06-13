@@ -1,4 +1,8 @@
 # FormValidation
+
+## This project has moved
+This project has moved to [Gitlab](https://gitlab.com/DrRoach/FormValidation).
+
 Simple to implement jQuery form validation plugin. Add validation to your input fields simply be adding HTML fields to them. An example may look like this:
 ```HTML
 <input type="text" fv-email="This must be a valid email." name="email" placeholder="Email">
